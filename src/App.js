@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import { format } from 'date-fns';
+
 
 
 function App() {
@@ -10,9 +12,16 @@ function App() {
     //prevent default submission
     e.preventDefault();
     //read the form data
-    const form = e.target
-    const formdata = new FormData(form)
+    const formdata = new FormData(e.target)
     const formJson = Object.fromEntries(formdata.entries())
+
+    //time stamp
+    let timeStamp = Date.now()
+    console.log(timeStamp)
+    let timeDate = format(timeStamp, '  @h:m aaa')
+    console.log(timeDate)
+    formJson['timestamp'] = timeStamp
+    formJson['timedate'] = timeDate
     console.log(formJson)
 
     //add item to items
@@ -44,7 +53,7 @@ function Overview({items}) {
   return (
     <>
       <h1>list</h1>
-      {items.map(item=> <li key={item.item}>{item.item},{item.cost}</li>)}
+      {items.map(item=> <li key={item.timestamp}>{`${item.item} ${item.cost} ${item.timedate}`}</li>)}
     </>
   )
 }
