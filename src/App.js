@@ -17,9 +17,7 @@ function App() {
 
     //time stamp
     let timeStamp = Date.now()
-    console.log(timeStamp)
-    let timeDate = format(timeStamp, '  @h:m aaa')
-    console.log(timeDate)
+    let timeDate = format(timeStamp, '  @h:mm aaa')
     formJson['timestamp'] = timeStamp
     formJson['timedate'] = timeDate
     console.log(formJson)
@@ -43,19 +41,30 @@ function App() {
           <button type='reset'>reset</button>
         </form>
         <hr/>
+        <TotalSpend items={items} />
         <Overview  items={items}/>
       </header>
     </div>
   );
 }
 
-function Overview({items}) {
-  return (
+function Overview({items}){
+  return(
     <>
-      <h1>list</h1>
       {items.map(item=> <li key={item.timestamp}>{`${item.item} ${item.cost} ${item.timedate}`}</li>)}
+
     </>
   )
+}
+
+function TotalSpend({items}){
+  let totalspend = 0
+  
+  for (let i = 0; i < items.length; i++) {
+    totalspend += Number(items[i].cost)
+  }
+
+  return <p>{`total spent ${totalspend} Bhat`}</p>
 }
 
 export default App;
