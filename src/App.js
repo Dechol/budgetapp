@@ -1,70 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import './styles/App.css';
 import { useState } from 'react';
 import { format } from 'date-fns';
-
-
+import ItemRow from './components/ItemRow';
+import TotalSpend from './components/TotalSpend';
+import MainInput from './components/MainInput';
+import myList from './fakelist';
+import EditTableRow from './components/EditTableRow';
 
 function App() {
-  const [items,setItems] = useState([])
-
+  const [items,setItems] = useState(myList)
+  const [updateState,setUpdateState] = useState(-1)
   function handleSubmit(e){
-    //prevent default submission
     e.preventDefault();
-    //read the form data
     const formdata = new FormData(e.target)
     const formJson = Object.fromEntries(formdata.entries())
-
-    //time stamp
-    let timeStamp = Date.now()
-    let timeDate = format(timeStamp, '  @h:mm aaa')
-    formJson['timestamp'] = timeStamp
-    formJson['timedate'] = timeDate
+    let timestamp = Date.now()
+    let time = format(timestamp, 'HH:mm')
+    let date = format(timestamp, 'd MMM yy')
+    formJson['timestamp'] = timestamp
+    formJson['time'] = time
+    formJson['date'] = date
     console.log(formJson)
-
-    //add item to items
     setItems([...items, formJson])
-    console.log(items)
   }
-
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          budget-app
-        </p>
-        <form onSubmit={handleSubmit}>
-          <input placeholder='item' name='item'/>
-          <input placeholder='cost' name='cost'/>
-          <button type='submit'>submit</button>
-          <button type='reset'>reset</button>
-        </form>
-        <hr/>
+        <MainInput handleSubmit={handleSubmit}/>
         <TotalSpend items={items} />
-        <Overview  items={items}/>
-      </header>
+        <table>
+          {items.map(item => 
+            updateState === item.timestamp? 
+            <EditTableRow 
+              item={item} 
+              items={items} 
+              setItems={setItems} 
+              handleSave={handleSave}/> : 
+            <ItemRow 
+              item={item}
+              handleEdit={handleEdit} 
+              handleDelete={handleDelete}/>
+          )}
+        </table>
     </div>
-  );
-}
-
-function Overview({items}){
-  return(
-    <>
-      {items.map(item=> <li key={item.timestamp}>{`${item.item} ${item.cost} ${item.timedate}`}</li>)}
-
-    </>
   )
-}
-
-function TotalSpend({items}){
-  let totalspend = 0
-  
-  for (let i = 0; i < items.length; i++) {
-    totalspend += Number(items[i].cost)
+  function handleEdit(id){
+    console.log('edit ' +id)
+    setUpdateState(id)
   }
-
-  return <p>{`total spent ${totalspend} Bhat`}</p>
+  function handleDelete(id){
+    console.log('delete ' +id)
+  }
+  function handleSave(){
+    setUpdateState(-1)
+  }
 }
 
 export default App;
