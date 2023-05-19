@@ -1,7 +1,6 @@
-.App {
-  text-align: center;
+*{
+  border: 1px solid red;
 }
-
 .App {
   background-color: #282c34;
   min-height: 100vh;
@@ -26,13 +25,22 @@ tr{
   background-color: #545c6b;
 }
 tr:hover{
-  background-color: coral;
+  background-color: #6e798e;
+}
+td{
+  text-align: center;
 }
 td button{
-  vertical-align: middle;
+  padding: 0px;
+  margin: 3px;
+
+}
+td button:hover{
+  background-color: #2a69de;
 }
 input{
   font-size: calc(10px + 1vmin);
 
 }
+
 

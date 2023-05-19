@@ -41,6 +41,9 @@ function App() {
               handleDelete={handleDelete}/>
           )}
         </table>
+        <div>
+          {items.map(item => <div>{item.date}</div>)}
+        </div>
     </div>
   )
   function handleEdit(id){
@@ -48,7 +51,9 @@ function App() {
     setUpdateState(id)
   }
   function handleDelete(id){
-    console.log('delete ' +id)
+    console.log('handleDelete +  ' +id)
+    const updatedItems = items.filter(i => id !== i.timestamp)
+    setItems(updatedItems)
   }
   function handleSave(){
     setUpdateState(-1)

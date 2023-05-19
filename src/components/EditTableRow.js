@@ -33,7 +33,7 @@ export default function EditTableRow({item, items, setItems, handleSave}){
           <td><input value={item.item} onChange={handleItem} name='item'/></td>
           <td><input value={item.cost} onChange={handleCost} name='cost'/></td>
           <td>
-            <button type='button' onClick={handleSave}>save</button>
+            <button type='button' onClick={handleSave}><i class="bi bi-plus-circle"></i></button>
           </td>
         </tr>
       )
