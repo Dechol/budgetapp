@@ -1,5 +1,4 @@
 *{
-  border: 1px solid red;
 }
 .App {
   background-color: #282c34;
@@ -15,13 +14,16 @@
   display: none;
 }
 table{
-  width: 60vw;
+  width: 80vw;
   border-spacing: 0px 2px;
 }
+
+
 td input{
   width: 150px;
 }
 tr{
+  width: 80vw;
   background-color: #545c6b;
 }
 tr:hover{
@@ -38,9 +40,14 @@ td button{
 td button:hover{
   background-color: #2a69de;
 }
+.highlight{
+  background-color: yellowgreen;
+}
 input{
   font-size: calc(10px + 1vmin);
 
 }
+
+
 
 
