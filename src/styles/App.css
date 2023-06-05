@@ -17,6 +17,9 @@ table{
   width: 80vw;
   border-spacing: 0px 2px;
 }
+.dayrow{
+  background-color: #2858b2;
+}
 
 
 td input{
