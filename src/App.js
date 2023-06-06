@@ -9,6 +9,7 @@ import SetDates from './components/SetDates';
 function App() {
   const [items,setItems] = useState(myList)
   const [updateState,setUpdateState] = useState(-1)
+  const [itemEdit,setItemEdit] = useState({})
 
   
   function handleSubmit(e){
@@ -34,9 +35,7 @@ function App() {
     const updatedItems = items.filter(i => id !== i.timestamp)
     setItems(updatedItems)
   }
-  function handleSave(){
-    setUpdateState(-1)
-  }
+
   function handleHighlight(id){
     console.log('handleHighlight +' +id)
   }
@@ -65,14 +64,15 @@ function App() {
           handleDelete={handleDelete}
           handleEdit={handleEdit}
           updateState={updateState}
-          handleSave={handleSave}
           handleHighlight={handleHighlight}
           setItems={setItems}
+          itemEdit={itemEdit}
+          setItemEdit={setItemEdit}
+          setUpdateState={setUpdateState}
         />
     </div>
   )
 }
-
 
 
 export default App;
