@@ -1,19 +1,18 @@
-import ItemRow from './ItemRow';
-import EditTableRow from './EditTableRow';
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
+import ItemTable from './ItemTable';
 
-export default function SetDates({items,handleEdit,handleDelete,updateState,
+export default function Table({items,handleEdit,handleDelete,updateState,
     setItems,handleSave,handleHighlight,setUpdateState}){
 
-    function DISPLAYITEMS(x){ 
-        let timestamp = Date.now()
-        let date = format(timestamp, 'd MMM yy')
-        if(date === x){
-            return true
-        } else {
-            return false
-        }
-    }
+    // function DISPLAYITEMS(x){ 
+    //     let timestamp = Date.now()
+    //     let date = format(timestamp, 'd MMM yy')
+    //     if(date === x){
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // }
 let dates = items.map(item => item.date)
 let setDates = new Set(dates)
 let datesArray = Array.from(setDates).sort().reverse()
@@ -22,7 +21,7 @@ let daysObjectArray = datesArray.map(d => {
 let day = {
 date: d,
 spend: Number(0),
-displayItems: DISPLAYITEMS(d),
+displayItems: true,
 items: []
 }
 for (let i = 0; i < items.length; i++) {
@@ -37,22 +36,35 @@ return (
     <td>{day.date}</td>
     <td>{day.spend}</td>
 </tr>
-{//return items
-day.displayItems && day.items.map(item => 
-updateState === item.timestamp? 
-<EditTableRow 
-item={item} 
-items={items} 
-setItems={setItems} 
-handleSave={handleSave}
-setUpdateState={setUpdateState}
-/> : 
-<ItemRow 
-item={item}
-handleEdit={handleEdit} 
-handleDelete={handleDelete}
-handleHighlight={handleHighlight}/>
-)
+{
+    day.displayItems && <ItemTable 
+                            dayItems={day.items} 
+                            handleDelete={handleDelete} 
+                            handleEdit={handleEdit}
+                            handleHighlight={handleHighlight}
+                            setUpdateState={setUpdateState}
+                            handleSave={handleSave}
+                            updateState={updateState}
+                            items={items}
+                            setItems={setItems}
+                        />
+
+//return items
+// day.displayItems && day.items.map(item => 
+// updateState === item.timestamp? 
+// <EditTableRow 
+// item={item} 
+// items={items} 
+// setItems={setItems} 
+// handleSave={handleSave}
+// setUpdateState={setUpdateState}
+// /> : 
+// <ItemRow 
+// item={item}
+// handleEdit={handleEdit} 
+// handleDelete={handleDelete}
+// handleHighlight={handleHighlight}/>
+// )
 }
 </>
 )}
@@ -63,7 +75,6 @@ return(
     <tr>
     <th>date</th>
     <th>total</th>
-
     </tr>
 {daysObjectArray}
 </table>

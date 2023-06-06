@@ -15,11 +15,10 @@ export default function EditTableRow({item, items, setItems,setUpdateState}){
     }
   return(
         <tr key={itemEdit.timestamp}>
-          <td><input value={itemEdit.date} onChange={handleChange} name='date' /></td>
-          <td></td>
           <td><input value={itemEdit.item} onChange={handleChange} name='item'/></td>
           <td><input value={itemEdit.cost} onChange={handleChange} name='cost'/></td>
           <td><input value={itemEdit.time} onChange={handleChange} name='time'/></td>
+          <td><input value={itemEdit.date} onChange={handleChange} name='date' /></td>
           <td>
             <button type='button' onClick={handleSave}><i class="bi bi-plus-circle"></i></button>
           </td>

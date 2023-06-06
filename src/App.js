@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import TotalSpend from './components/TotalSpend';
 import MainInput from './components/MainInput';
 import myList from './fakelist';
-import SetDates from './components/SetDates';
+import Table from './components/SetDates';
 
 function App() {
   const [items,setItems] = useState(myList)
@@ -59,7 +59,7 @@ function App() {
               handleHighlight={handleHighlight}/>
           )}
         </table> */}
-        <SetDates 
+        <Table 
           items={items} 
           handleDelete={handleDelete}
           handleEdit={handleEdit}

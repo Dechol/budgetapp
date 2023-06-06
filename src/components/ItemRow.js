@@ -4,10 +4,8 @@ export default function ItemRow({item,handleEdit,handleDelete,handleHighlight}){
     return(
         <tr 
           key={item.timestamp} 
-          // onClick={()=>handleHighlight(item.timestamp)}
+          onClick={()=>handleHighlight(item.timestamp)}
         >
-          <td></td>
-          <td></td>
           <td>{item.item}</td>
           <td>{item.cost}</td>
           <td>{item.time}</td>
